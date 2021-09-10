@@ -31,13 +31,13 @@ set(ROS2_DEPENDENCIES
   "image_meta_msgs_ros2"
   "camera_control_msgs_ros2"
   "sensor_msgs"
-  OpenCV
 )
 
 # find dependencies
 find_package(ament_cmake REQUIRED)
 find_package(ament_cmake_auto REQUIRED)
 find_package(ament_cmake_ros REQUIRED)
+find_package(OpenCV REQUIRED)
 
 foreach(pkg ${ROS2_DEPENDENCIES})
   find_package(${pkg} REQUIRED)
@@ -53,6 +53,7 @@ ament_auto_add_executable(camera_driver_node
   src/camera_driver_node.cpp
 )
 
+ament_target_dependencies(camera_driver OpenCV)
 rclcpp_components_register_nodes(camera_driver "flir_spinnaker_ros2::CameraDriver")
 
 target_include_directories(camera_driver PRIVATE include)
