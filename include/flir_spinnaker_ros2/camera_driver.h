@@ -76,6 +76,7 @@ private:
   // ----- variables --
   std::shared_ptr<rclcpp::Node> node_;
   image_transport::CameraPublisher pub_;
+  rclcpp::Publisher<sensor_msgs::msg::Image>::SharedPtr std_pub_;
   rclcpp::Publisher<image_meta_msgs_ros2::msg::ImageMetaData>::SharedPtr
     metaPub_;
   std::string serial_;

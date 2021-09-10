@@ -23,6 +23,7 @@
 #include <rclcpp_components/register_node_macro.hpp>
 #include <sensor_msgs/fill_image.hpp>
 #include <sensor_msgs/image_encodings.hpp>
+#include <opencv2/opencv.hpp>
 
 #include "logging.h"
 
@@ -212,6 +213,7 @@ void CameraDriver::createCameraParameters()
 {
   for (const auto name : parameterList_) {
     const auto it = parameterMap_.find(name);
+	LOG_INFO("SETTING PARAM: " << name);
     if (it != parameterMap_.end()) {
       const auto & ni = it->second;  // should always succeed
       try {
@@ -224,6 +226,8 @@ void CameraDriver::createCameraParameters()
           name, rclcpp::ParameterValue(), ni.descriptor, true);
       }
     }
+
+	std::cout << std::endl;
   }
 }
 
@@ -435,7 +439,7 @@ void CameraDriver::doPublish(const ImageConstPtr & im)
   const std::string encoding =
     sensor_msgs::image_encodings::BAYER_RGGB8;  // looks good
 
-  if (pub_.getNumSubscribers() > 0) {
+  //if (pub_.getNumSubscribers() > 0) {
     sensor_msgs::msg::CameraInfo::UniquePtr
       cinfo(new sensor_msgs::msg::CameraInfo(cameraInfoMsg_));
     // will make deep copy. Do we need to? Probably...
@@ -451,7 +455,7 @@ void CameraDriver::doPublish(const ImageConstPtr & im)
       //std::cout << "dt: " << (t1 - t0).nanoseconds() * 1e-9 << std::endl;
       publishedCount_++;
     }
-  }
+  //}
   if (metaPub_->get_subscription_count() != 0) {
       metaMsg_.header.stamp = t;
       metaMsg_.brightness = im->brightness_;

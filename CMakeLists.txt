@@ -30,6 +30,8 @@ set(ROS2_DEPENDENCIES
   "flir_spinnaker_common"
   "image_meta_msgs_ros2"
   "camera_control_msgs_ros2"
+  "sensor_msgs"
+  OpenCV
 )
 
 # find dependencies

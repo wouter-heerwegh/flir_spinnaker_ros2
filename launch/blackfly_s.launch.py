@@ -5,24 +5,26 @@ from launch import LaunchDescription
 from ament_index_python.packages import get_package_share_directory
 
 camera_params = {
+	'serial_number': '19372266',
     'debug': False,
-    'compute_brightness': False,
-    'dump_node_map': False,
+    #'compute_brightness': False,
+    #'dump_node_map': False,
     # set parameters defined in grasshopper.cfg    
-    'gain_auto': 'Continous',
-    'exposure_auto': 'Continuous',
-    'frame_rate_auto': 'Off',
-    'frame_rate': 100.0,
-    'trigger_mode': 'Off',
-    'chunk_mode_active': True,
-    'chunk_selector_frame_id': 'FrameID',
-    'chunk_enable_frame_id': True,
-    'chunk_selector_exposure_time': 'ExposureTime',
-    'chunk_enable_exposure_time': True,
-    'chunk_selector_gain': 'Gain',
-    'chunk_enable_gain': True,
-    'chunk_selector_timestamp': 'Timestamp',
-    'chunk_enable_timestamp': True,
+    #'gain_auto': 'Continuous',
+    #'exposure_auto': 'Continuous',
+    #'frame_rate_auto': 'On',
+    #'frame_rate': 25.0,
+    #'trigger_mode': 'Off',
+	#'trigger_delay': 9.0,
+    #'chunk_mode_active': True,
+    #'chunk_selector_frame_id': 'FrameID',
+    #'chunk_enable_frame_id': True,
+    #'chunk_selector_exposure_time': 'ExposureTime',
+    #'chunk_enable_exposure_time': True,
+    #'chunk_selector_gain': 'Gain',
+    #'chunk_enable_gain': True,
+    #'chunk_selector_timestamp': 'Timestamp',
+    #'chunk_enable_timestamp': True,
     }
 
 def generate_launch_description():
@@ -40,7 +42,7 @@ def generate_launch_description():
                 name=[LaunchConfig('camera_name')],
                 parameters=[camera_params,
                         {'parameter_file': config_dir + 'blackfly_s.cfg',
-                         'serial_number': [LaunchConfig('serial')],
+                         #'serial_number': [LaunchConfig('serial')],
                         }],
                 remappings=[('~/control', '/exposure_control/control'),],
     )
